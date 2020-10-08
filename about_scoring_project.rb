@@ -28,9 +28,38 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # More scoring examples are given in the tests below:
 #
 # Your goal is to write the score method.
+def find_total(dice, number)
+  total = 0
+  if dice.include?(number)
+    count = dice.count(number)
+    total = if count >= 3
+              case number
+              when 1
+                total += 1000
+              else
+                total += 100 * number
+              end
+            else
+              case number
+              when 1
+                total += 100
+              when 5
+                total += 50
+              else
+                total += 0
+              end
+            end
+  end
+  return total
+end
 
 def score(dice)
-  # You need to write this method
+  return 0 if dice.empty?
+  puts find_total(dice, 1)
+  # dice.each do |i|
+  #   total = find_total(dice, i)
+  #   puts total
+  # end
 end
 
 class AboutScoringProject < Neo::Koan
